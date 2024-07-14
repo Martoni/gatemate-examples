@@ -1,10 +1,11 @@
-.PHONY: program clean
+include config.mk
 
-build:
-	quartus_sh --flow compile counter
+PRFLAGS +=-ccf src/blink.ccf
+TOP = top
 
-program:
-	quartus_pgm -m jtag -c 1 -o "p;output_files/counter.sof@1"
+VHDLDIR=src
 
-clean:
-	rm -rf db incremental_db output_files
+VLOG_SRC = src/$(TOP).v
+
+mrproper:
+	rm -f $(TOP).json $(TOP).asc $(VERILOGDIR)/$(TOP).v
