@@ -19,7 +19,9 @@ CELLS_IMPL  = $(TOOLMAINPATH)/bin/p_r/cpelib.v
 
 ## target sources
 #VLOG_SRC = src/GatemateBlink.v 
-VHDL_SRC = $(shell find ./src/ -type f \( -iname \*.vhd -o -iname \*.vhdl \))
+VHDL_MAIN = $(shell find ./src/ -type f \( -iname \*.vhd -o -iname \*.vhdl \))
+VHDL_LIB = $(shell find ./lib/ -type f \( -iname \*.vhd -o -iname \*.vhdl \))
+VHDL_SRC = $(VHDL_MAIN) $(VHDL_LIB)
 
 ## misc tools
 RM = rm -rf
@@ -31,7 +33,7 @@ synth_vlog: $(VLOG_SRC)
 	$(YOSYS) -qql log/synth.log -p 'read -sv $^; synth_gatemate -top $(TOP) -nomx8 -vlog net/$(TOP)_synth.v'
 
 synth_vhdl: $(VHDL_SRC)
-	$(YOSYS) -ql log/synth.log -p 'ghdl --warn-no-binding -C --ieee=synopsys $^ -e --std=08 $(TOP); synth_gatemate -top $(TOP) -nomx8 -vlog net/$(TOP)_synth.v'
+	$(YOSYS) -ql log/synth.log -p 'ghdl --std=08 --warn-no-binding -C --ieee=synopsys $^ -e $(TOP); synth_gatemate -top $(TOP) -nomx8 -vlog net/$(TOP)_synth.v'
 
 impl:
 	$(PR) -v -i net/$(TOP)_synth.v -o $(TOP) $(PRFLAGS) > log/$@.log

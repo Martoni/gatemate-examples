@@ -107,8 +107,8 @@ begin
   rom : entity work.single_port_rom
   generic map(
     ADDR_WIDTH => 12,
-    DATA_WIDTH => 8,
-    INIT_FILE  => "rom/blink.mif"
+    DATA_WIDTH => 8
+--    INIT_FILE  => "rom/blink.mif"
   )
   port map(
     clk  => clk,
