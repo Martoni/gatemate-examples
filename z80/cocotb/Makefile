@@ -21,6 +21,7 @@ VHDL_SOURCES += $(PWD)/../src/top.vhd \
 COMPILE_ARGS=--std=08 --ieee=synopsys -fexplicit
 RUN_ARGS=$(COMPILE_ARGS)
 EXTRA_ARGS=$(COMPILE_ARGS)
+SIM_ARGS+=--vcd=top.vcd
 # use VHDL_SOURCES for VHDL files
 
 # TOPLEVEL is the name of the toplevel module in your Verilog or VHDL file

@@ -7,7 +7,7 @@ from cocotb.triggers import FallingEdge, Timer
 async def generate_clock(dut):
     """Generate clock pulses."""
 
-    for cycle in range(10):
+    while True:
         dut.clk.value = 0
         await Timer(1, units="ns")
         dut.clk.value = 1
@@ -20,7 +20,7 @@ async def my_second_test(dut):
 
     await cocotb.start(generate_clock(dut))  # run the clock "in the background"
 
-    await Timer(5, units="ns")  # wait a bit
+    await Timer(150, units="us")  # wait a bit
     await FallingEdge(dut.clk)  # wait for falling edge/"negedge"
 
     dut._log.info("End of test")
