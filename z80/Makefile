@@ -1,4 +1,4 @@
 include config.mk
 
-PRFLAGS +=-ccf src/blink.ccf
+PRFLAGS +=-ccf src/top.ccf
 TOP=top
